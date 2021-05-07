@@ -1,0 +1,14 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Test NSI</title>
+  </head>
+  <body bgcolor="#FFFACD" style="font-family:Times; text-align:center;">
+     <form action="/index.py" method="POST">
+    <h2>Formulaire pour devenir l'esclave de Sam</h2>
+    <p>aller y rentrer les infos</p>
+    <input type="text" name="name" value="Ton Nom !! plus vite que ça !!" />
+    <p align="center"> <img src="photo.jpg"> </p>
+     <input type="submit" name="send" 
+    value="Merci de Valider futur esclave" />
+
+  </body>

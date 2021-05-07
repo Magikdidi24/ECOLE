@@ -1,0 +1,130 @@
+def accessible(u,n,P):
+    i,j=u
+    L={(k,j)for k in range (0,n)}
+    if set(P).intersection(L): return False
+    M={(i,k)for k in range (0,n)}
+    if set(P).intersection(M): return False
+    N={(i+k,j-k) for k in range(-i,n-i)}
+    if set(P).intersection(N): return False
+    O={(i-k,j-k) for k in range(i,i-n,-1)}
+    if set(P).intersection(O): return False
+    return True
+
+def reines(n):
+    i,j,L,P,M=0,0,[],[],[]
+    while True:
+        while i<n:
+            if accessible((i,j),n,P):
+                P.append((i,j))
+                M.append(frozenset(P))
+                i,j=0,j+1
+            else: i+=1
+        if len(P)==n: L.append(frozenset(P))
+        if not P: break
+        a,j=P.pop()
+        M.append(frozenset(P))
+        i=a+1
+    return L,M
+
+def convertcase(u):
+    return chr(97+u[0])+str(u[1]+1)
+
+def convertpos(P):
+    return [convertcase(p) for p in P]
+
+rot = lambda  u,n: (n-1-u[1],u[0])
+symv = lambda u,n: (n-1-u[0],u[1])
+symd1 = lambda u,n:  (u[1],u[0])
+symd2 = lambda u,n: (n-1-u[1],n-1-u[0])
+rot2 = lambda u,n: rot(rot(u,n),n)
+rot3 = lambda u,n: rot(rot2(u,n),n)
+symh = lambda u,n: (u[0],n-1-u[1])
+
+transf={rot,symv,symd1,symd2,rot2,rot3,symh}
+
+import copy
+def elimine(V,n):
+    L=copy.copy(V)
+    M=[]
+    while L:
+        m=L.pop()
+        N={frozenset({f(u,n) for u in m}) for f in transf}  
+        if not N.intersection(L):
+            M.append(m)
+    return M
+
+
+def convertcaseQ(u):
+    return 'Q'+chr(97+u[0])+str(u[1]+1)
+
+
+
+def convertposQ(P):
+    return {convertcaseQ(p) for p in P}
+
+
+def reconvertcase(c):
+    return (ord(c[0]-97),int(c[1]-1))
+    
+def creatediag(P,n):
+    f=lambda u: u[1]
+    P=list(P)
+    P.sort(key=f)
+    interdit=[(k,l) for k in range(0,n) for l in range(0,n) if (k,l) not in P if not accessible((k,l),n,P)]
+    ch="\\begin{frame}\\begin{center}"+ "\chessboard[pgfstyle=cross,shortenstart=0.5ex,shortenend=0.5ex,color=blue, backfields={},setpieces={} ]".format(set(convertpos(interdit)),convertposQ(P))+"\\end{center}\\end{frame}"
+    ch=ch.replace("'","")
+    return ch
+
+
+
+def creatediagSanscroix(P,n):
+    f=lambda u: u[1]
+    P=list(P)
+    P.sort(key=f)
+    ch="\\begin{frame}\\begin{center}"+ "\chessboard[pgfstyle=cross,shortenstart=0.5ex,shortenend=0.5ex,color=blue, setpieces={} ]".format(convertposQ(P))+"\\end{center}\\end{frame}"
+    ch=ch.replace("'","")
+    return ch
+
+
+def createbeam(n):
+    fic=open("reinebeam.tex",'w')
+    L,R=reines(n)
+    for r in R:
+        fic.write(creatediag(r,n))
+        fic.write("\n\n")
+        if r in L:break
+    fic.close()
+
+    fic=open("reinesansrepet.tex",'w')
+    N=elimine(L,n)
+    for r in N:
+        fic.write(creatediagSanscroix(r,n))
+        fic.write("\n\n")
+    fic.close()
+
+    fic=open("lesSol.tex",'w')
+    for ll in L:
+        f=lambda u: u[1]
+        l=list(ll)
+        l.sort(key=f)
+        ch=str(convertpos(l))
+        ch=ch.replace("'","")
+        fic.write(ch)
+        fic.write("\n\n")
+    fic.close()
+
+
+    fic=open("lesSolIsom.tex",'w')
+    for ll in N:
+        f=lambda u: u[1]
+        l=list(ll)
+        l.sort(key=f)
+        ch=str(convertpos(l))
+        ch=ch.replace("'","")
+        fic.write(ch)
+        fic.write("\n\n")
+    fic.close()
+
+
+N=8
+createbeam(N)

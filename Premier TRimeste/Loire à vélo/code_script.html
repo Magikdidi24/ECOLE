@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title align= "center">Formulaire La Loire à Vélo</title>
+    <link rel="stylesheet" type="text/css" href="css/code_pageinternet.css">
+  </head>
+
+  <body>
+    <p>
+    <h1>Formulaire La Loire à Vélo</h1>
+    </p>
+
+     <form action="code.php" method="POST">
+
+       <p  id="genre"><label for="genre"></label>
+       <input type="radio"  name="fm_vl_la_loire_civi" id="Mme"   value="Mme" /> Madame
+       <input type="radio"  name="fm_vl_la_loire_civi" id="Mlle"  value="Mlle" /> Mademoiselle
+       <input type="radio"  name="fm_vl_la_loire_civi" id="Mr"    value="Mr" /> Monsieur
+       <input type="radio"  name="fm_vl_la_loire_civi" id="autres" value="Au" /> Autres
+       </p>
+
+       <label for="fm_vl_la_loire_prenom">Votre prénom</label>
+       <input type="text" name="fm_vl_la_loire_prenom" id = "fm_vl_la_loire_prenom" placeholder="Prénom" required />
+       <span id="aidePrenom"></span>
+
+
+
+
+       <label for="fm_vl_la_loire_nom">Votre nom</label>
+       <input   type="text"
+                id = "fm_vl_la_loire_nom"
+                name=""
+                value=""
+                placeholder="Nom"
+                required/>
+
+
+       <label>Nombre</label>
+       <select name="fm_vl_la_loire_personne">
+          <option value="1" selected="selected">1 personne</option>
+          <option value="2">2 personnes</option>
+          <option value="3">3 personnes</option>
+          <option value="4">4 personnes</option>
+          <option value="5">5 personnes</option>
+          <option value="6">6 personnes</option>
+       </select>
+
+
+       <label>Votre code postal</label>
+       <input   type="text"
+                name="fm_vl_la_loire_postal"
+                pattern="[0-9]{5}"
+                placeholder="72000"
+                required/>
+
+
+       <label>Ville</label>
+       <input   type="text"
+                name="fm_vl_la_loire_Ville"
+                value=""
+                placeholder="LE MANS"
+                required/>
+
+
+
+        <label for="pays">Pays</label>
+        <select name="pays" id="pays">
+                <optgroup label="Europe">
+                    <option value="france">France</option>
+                    <option value="espagne">Espagne</option>
+                    <option value="italie">Italie</option>
+                    <option value="royaume-uni">Royaume-Uni</option>
+                </optgroup>
+                <optgroup label="Amérique">
+                    <option value="canada">Canada</option>
+                    <option value="etats-unis">Etats-Unis</option>
+                </optgroup>
+                <optgroup label="Asie">
+                    <option value="chine">Chine</option>
+                    <option value="japon">Japon</option>
+                </optgroup>
+        </select>
+         <label>Numéro de téléphone</label>
+       <input   type="tel"
+                name="fm_vl_la_loire_phone"
+                pattern="0[1-9][0-9]{8}"
+                placeholder="0623568974"/>
+
+
+        <label>Adresse email</label>
+      <input  type="email"
+              name="fm_vl_la_loire_email"
+              id="fm_vl_la_loire_email"
+              placeholder="gerald.123@site.fr" />
+     <span id="aidecouriel"></span>
+
+      <label>Date d'arrivée</label>
+      <input  id="start"
+              type="date"
+              name="fm_vl_la_loire_date_arrivee"
+              value="2020/10/11"
+              min="2020/10/11" max="2030/01/02">
+
+
+      <label>Date du départ</label>
+      <input  id="start"
+              type="date"
+              name="fm_vl_la_loire_date_départ"
+              value="2020/10/11"
+              min="2020/10/11" max="2030/01/02">
+
+
+
+    <label for="fm_vl_la_loire_comment">Commentaire</label>
+    <textarea id="fm_vl_la_loire_comment"
+              name="fm_vl_la_loire_comment"
+              rows=4
+              cols=40>
+    </textarea>
+
+
+
+    <p>
+      <input type="submit" value="Envoyer"/>
+      <input type="reset" value="Effacer"/>
+    </p>
+</form>
+
+<script src="js/ecoute.js"></script>
+
+<footer>
+  Author Samuel Berthelot
+</footer>
+</body>
+</html>

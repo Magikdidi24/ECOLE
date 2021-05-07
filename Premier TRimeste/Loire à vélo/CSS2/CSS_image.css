@@ -1,0 +1,21 @@
+body{
+background-image: url("Loire_a_velo2.jpg");
+font-family:"Comic Sans MS";
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+form {
+ margin:auto;
+ border:3px grey solid;
+ border-radius:10px;
+ padding:10px;
+ width:600px;
+ background-color:white
+
+ }
+ h1 {
+   font-size:2.3em;
+   color:#000000;
+   margin:auto;
+ }
